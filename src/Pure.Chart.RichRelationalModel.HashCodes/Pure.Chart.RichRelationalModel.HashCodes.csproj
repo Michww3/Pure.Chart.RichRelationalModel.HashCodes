@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net7.0;net8.0;net9.0;net10.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -16,4 +16,12 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/kudima03/Pure.Chart.RichRelationalModel.HashCodes</PackageProjectUrl>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Pure.Chart.Model.HashCodes" Version="0.1.0-preview.0.1.0" />
+    <PackageReference
+      Include="Pure.Chart.RichRelationalModel.Abstractions"
+      Version="0.1.0-preview.1.0.0"
+    />
+    <PackageReference Include="Pure.HashCodes" Version="2.1.0" />
+  </ItemGroup>
 </Project>
