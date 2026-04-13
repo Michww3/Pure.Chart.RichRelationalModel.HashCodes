@@ -63,6 +63,70 @@ public sealed record ChartRichRelationalModelHashTests
     }
 
     [Fact]
+    public void ProduceCorrectHashFromValues()
+    {
+        IGuid id = new Guid();
+        IString title = new RandomString();
+        IString description = new RandomString();
+        IGuid typeId = new Guid();
+        IChartType type = new ChartTypeRichRelationalModel(
+            new Guid(),
+            new RandomString()
+        );
+        IGuid xAxisId = new Guid();
+        IAxis xAxis = new AxisRichRelationalModel(
+            new Guid(),
+            new Guid(),
+            new RandomString()
+        );
+        IGuid yAxisId = new Guid();
+        IAxis yAxis = new AxisRichRelationalModel(
+            new Guid(),
+            new Guid(),
+            new RandomString()
+        );
+        IEnumerable<ISeries> series =
+        [
+            new SeriesRichRelationalModel(
+                new Guid(),
+                new Guid(),
+                new RandomString(),
+                new RandomString(),
+                new RandomString()
+            ),
+        ];
+
+        IChartRichRelationalModel model = new ChartRichRelationalModel(
+            id,
+            title,
+            description,
+            typeId,
+            type,
+            xAxisId,
+            xAxis,
+            yAxisId,
+            yAxis,
+            series
+        );
+
+        ChartRichRelationalModelHash expected = new ChartRichRelationalModelHash(model);
+        ChartRichRelationalModelHash actual = new ChartRichRelationalModelHash(
+            id,
+            title,
+            description,
+            typeId,
+            type,
+            xAxisId,
+            xAxis,
+            yAxisId,
+            yAxis,
+            series
+        );
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
     public void ProduceCorrectHashFromAllHashes()
     {
         IGuid id = new Guid();
