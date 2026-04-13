@@ -33,12 +33,18 @@ public sealed record SeriesRichRelationalModelHashTests
     [Fact]
     public void ProduceCorrectHashFromModel()
     {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
         ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
-            new Guid(),
-            new Guid(),
-            new RandomString(),
-            new RandomString(),
-            new RandomString()
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource
         );
 
         SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
@@ -48,30 +54,865 @@ public sealed record SeriesRichRelationalModelHashTests
     }
 
     [Fact]
-    public void ProduceCorrectHashFromAllHashes()
+    public void ProduceCorrectHashFromValues()
     {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
         ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
-            new Guid(),
-            new Guid(),
-            new RandomString(),
-            new RandomString(),
-            new RandomString()
-        );
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
 
         SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
         SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
-            new DeterminedHash(model.Id),
-            new DeterminedHash(model.ChartId),
-            new DeterminedHash(
-                (model as RelationalModel.Abstractions.ISeriesRelationalModel).Legend
-            ),
-            new DeterminedHash(
-                (model as RelationalModel.Abstractions.ISeriesRelationalModel).XAxisSource
-            ),
-            new DeterminedHash(
-                (model as RelationalModel.Abstractions.ISeriesRelationalModel).YAxisSource
-            )
-        );
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromIdHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            new DeterminedHash(id),
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromChartIdHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            id,
+            new DeterminedHash(chartId),
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromIdHashChartIdHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            new DeterminedHash(id),
+            new DeterminedHash(chartId),
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromLegendHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            id,
+            chartId,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).Legend),
+            xAxisSource,
+            yAxisSource);
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromIdHashLegendHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            new DeterminedHash(id),
+            chartId,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).Legend),
+            xAxisSource,
+            yAxisSource);
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromChartIdHashLegendHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            id,
+            new DeterminedHash(chartId),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).Legend),
+            xAxisSource,
+            yAxisSource);
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromIdHashChartIdHashLegendHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            new DeterminedHash(id),
+            new DeterminedHash(chartId),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).Legend),
+            xAxisSource,
+            yAxisSource);
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromXAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            id,
+            chartId,
+            legend,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).XAxisSource),
+            yAxisSource);
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromIdHashXAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            new DeterminedHash(id),
+            chartId,
+            legend,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).XAxisSource),
+            yAxisSource);
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromChartIdHashXAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            id,
+            new DeterminedHash(chartId),
+            legend,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).XAxisSource),
+            yAxisSource);
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromIdHashChartIdHashXAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            new DeterminedHash(id),
+            new DeterminedHash(chartId),
+            legend,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).XAxisSource),
+            yAxisSource);
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromLegendHashXAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            id,
+            chartId,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).Legend),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).XAxisSource),
+            yAxisSource);
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromIdHashLegendHashXAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            new DeterminedHash(id),
+            chartId,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).Legend),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).XAxisSource),
+            yAxisSource);
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromChartIdHashLegendHashXAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            id,
+            new DeterminedHash(chartId),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).Legend),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).XAxisSource),
+            yAxisSource);
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromIdHashChartIdHashLegendHashXAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            new DeterminedHash(id),
+            new DeterminedHash(chartId),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).Legend),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).XAxisSource),
+            yAxisSource);
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromYAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).YAxisSource));
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromIdHashYAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            new DeterminedHash(id),
+            chartId,
+            legend,
+            xAxisSource,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).YAxisSource));
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromChartIdHashYAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            id,
+            new DeterminedHash(chartId),
+            legend,
+            xAxisSource,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).YAxisSource));
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromIdHashChartIdHashYAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            new DeterminedHash(id),
+            new DeterminedHash(chartId),
+            legend,
+            xAxisSource,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).YAxisSource));
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromLegendHashYAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            id,
+            chartId,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).Legend),
+            xAxisSource,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).YAxisSource));
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromIdHashLegendHashYAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            new DeterminedHash(id),
+            chartId,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).Legend),
+            xAxisSource,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).YAxisSource));
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromChartIdHashLegendHashYAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            id,
+            new DeterminedHash(chartId),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).Legend),
+            xAxisSource,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).YAxisSource));
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromIdHashChartIdHashLegendHashYAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            new DeterminedHash(id),
+            new DeterminedHash(chartId),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).Legend),
+            xAxisSource,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).YAxisSource));
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromXAxisSourceHashYAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            id,
+            chartId,
+            legend,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).XAxisSource),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).YAxisSource));
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromIdHashXAxisSourceHashYAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            new DeterminedHash(id),
+            chartId,
+            legend,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).XAxisSource),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).YAxisSource));
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromChartIdHashXAxisSourceHashYAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            id,
+            new DeterminedHash(chartId),
+            legend,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).XAxisSource),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).YAxisSource));
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromIdHashChartIdHashXAxisSourceHashYAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            new DeterminedHash(id),
+            new DeterminedHash(chartId),
+            legend,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).XAxisSource),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).YAxisSource));
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromLegendHashXAxisSourceHashYAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            id,
+            chartId,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).Legend),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).XAxisSource),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).YAxisSource));
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromIdHashLegendHashXAxisSourceHashYAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            new DeterminedHash(id),
+            chartId,
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).Legend),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).XAxisSource),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).YAxisSource));
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromChartIdHashLegendHashXAxisSourceHashYAxisSourceHash()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            id,
+            new DeterminedHash(chartId),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).Legend),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).XAxisSource),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).YAxisSource));
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    [Fact]
+    public void ProduceCorrectHashFromHashes()
+    {
+        IGuid id = new Guid();
+        IGuid chartId = new Guid();
+        IString legend = new RandomString();
+        IString xAxisSource = new RandomString();
+        IString yAxisSource = new RandomString();
+
+        ISeriesRichRelationalModel model = new SeriesRichRelationalModel(
+            id,
+            chartId,
+            legend,
+            xAxisSource,
+            yAxisSource);
+
+        SeriesRichRelationalModelHash expected = new SeriesRichRelationalModelHash(model);
+        SeriesRichRelationalModelHash actual = new SeriesRichRelationalModelHash(
+            new DeterminedHash(id),
+            new DeterminedHash(chartId),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).Legend),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).XAxisSource),
+            new DeterminedHash((model as RelationalModel.Abstractions.ISeriesRelationalModel).YAxisSource));
 
         Assert.True(expected.SequenceEqual(actual));
     }
