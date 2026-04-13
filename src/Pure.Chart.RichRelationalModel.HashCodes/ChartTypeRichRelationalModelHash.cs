@@ -3,6 +3,8 @@ using Pure.Chart.RelationalModel.Abstractions;
 using Pure.Chart.RichRelationalModel.Abstractions;
 using Pure.HashCodes;
 using Pure.HashCodes.Abstractions;
+using Pure.Primitives.Abstractions.Guid;
+using Pure.Primitives.Abstractions.String;
 
 namespace Pure.Chart.RichRelationalModel.HashCodes;
 
@@ -34,9 +36,32 @@ public sealed record ChartTypeRichRelationalModelHash : IDeterminedHash
 
     public ChartTypeRichRelationalModelHash(IChartTypeRichRelationalModel model)
         : this(
-            new DeterminedHash(model.Id),
-            new DeterminedHash((model as IChartTypeRelationalModel).Name)
-        )
+            model.Id,
+            (model as IChartTypeRelationalModel).Name)
+    { }
+
+    public ChartTypeRichRelationalModelHash(
+        IGuid id,
+        IString name)
+        : this(
+            new DeterminedHash(id),
+            name)
+    { }
+
+    public ChartTypeRichRelationalModelHash(
+        IDeterminedHash idHash,
+        IString name)
+        : this(
+            idHash,
+            new DeterminedHash(name))
+    { }
+
+    public ChartTypeRichRelationalModelHash(
+        IGuid id,
+        IDeterminedHash nameHash)
+        : this(
+            new DeterminedHash(id),
+            nameHash)
     { }
 
     public ChartTypeRichRelationalModelHash(
