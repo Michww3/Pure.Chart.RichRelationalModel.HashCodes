@@ -46,8 +46,7 @@ public sealed record SeriesRichRelationalModelHash : IDeterminedHash
             model.ChartId,
             (model as ISeriesRelationalModel).Legend,
             (model as ISeriesRelationalModel).XAxisSource,
-            (model as ISeriesRelationalModel).YAxisSource
-        )
+            (model as ISeriesRelationalModel).YAxisSource)
     { }
 
     public SeriesRichRelationalModelHash(
