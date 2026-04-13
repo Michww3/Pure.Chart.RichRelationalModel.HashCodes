@@ -1,9 +1,12 @@
 using System.Collections;
+using Pure.Chart.Model.Abstractions;
 using Pure.Chart.Model.HashCodes;
 using Pure.Chart.RelationalModel.Abstractions;
 using Pure.Chart.RichRelationalModel.Abstractions;
 using Pure.HashCodes;
 using Pure.HashCodes.Abstractions;
+using Pure.Primitives.Abstractions.Guid;
+using Pure.Primitives.Abstractions.String;
 
 namespace Pure.Chart.RichRelationalModel.HashCodes;
 
@@ -51,17 +54,40 @@ public sealed record ChartRichRelationalModelHash : IDeterminedHash
 
     public ChartRichRelationalModelHash(IChartRichRelationalModel model)
         : this(
-            new DeterminedHash(model.Id),
-            new DeterminedHash((model as IChartRelationalModel).Title),
-            new DeterminedHash((model as IChartRelationalModel).Description),
-            new DeterminedHash(model.TypeId),
-            new ChartTypeHash(model.Type),
-            new DeterminedHash(model.XAxisId),
-            new AxisHash(model.XAxis),
-            new DeterminedHash(model.YAxisId),
-            new AxisHash(model.YAxis),
-            new DeterminedHash(model.Series.Select(x => new SeriesHash(x)))
-        )
+            model.Id,
+            (model as IChartRelationalModel).Title,
+            (model as IChartRelationalModel).Description,
+            model.TypeId,
+            model.Type,
+            model.XAxisId,
+            model.XAxis,
+            model.YAxisId,
+            model.YAxis,
+            model.Series)
+    { }
+
+    public ChartRichRelationalModelHash(
+        IGuid id,
+        IString title,
+        IString description,
+        IGuid typeId,
+        IChartType type,
+        IGuid xAxisId,
+        IAxis xAxis,
+        IGuid yAxisId,
+        IAxis yAxis,
+        IEnumerable<ISeries> series)
+        : this(
+            new DeterminedHash(id),
+            new DeterminedHash(title),
+            new DeterminedHash(description),
+            new DeterminedHash(typeId),
+            new ChartTypeHash(type),
+            new DeterminedHash(xAxisId),
+            new AxisHash(xAxis),
+            new DeterminedHash(yAxisId),
+            new AxisHash(yAxis),
+            new DeterminedHash(series.Select(x => new SeriesHash(x))))
     { }
 
     public ChartRichRelationalModelHash(
